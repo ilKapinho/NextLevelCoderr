@@ -21,7 +21,6 @@ class Dinosaur(Sprite):
         self.dino_duck = False
     
     def update(self, user_input):
-        self.run()
         if self.dino_run:
             self.run()
         elif self.dino_jump:
@@ -59,10 +58,11 @@ class Dinosaur(Sprite):
         self.dino_rect.x = self.X_POS
         self.dino_rect.y = self.Y_POS_DUCK
         self.step_index += 1 
+        
     def jump(self):
         self.image = JUMPING
         if self.dino_jump:
-            self.dino_rect.y -= self.jump_vel * 16
+            self.dino_rect.y -= self.jump_vel * 4
             self.jump_vel -= 0.8
 
         if self.jump_vel < - self.JUMP_VEL:
