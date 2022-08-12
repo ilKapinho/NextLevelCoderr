@@ -1,9 +1,7 @@
-from turtle import width
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
-
 from dino_runner.utils.constants import BG, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.utils.text_utils import draw_message_component
 
@@ -24,22 +22,26 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
+        self.sound_s_menu = pygame.mixer.Sound("dino_runner/effect_sounds/sec_menu_s.mp3")
+        self.sound_s_menu.set_volume(0.2)
 
         self.points = 0
         self.high_score = 0
         self.death_count = 0
-    
+        
     def execute(self):
         self.running = True
         while self.running :
             if not self.playing :
                 self.show_menu()
+                self.sound_s_menu.play()
 
         pygame.display.quit()
         pygame.quit()
 
     def run(self):
         # Game loop: events - update - draw
+        self.sound_s_menu.fadeout(1)
         self.points = 0
         self.game_speed = 20
         self.obstacle_manager.reset_obstacles()
@@ -109,6 +111,8 @@ class Game:
                 self.playing = False
                 self.playing = False 
             if event.type == pygame.KEYDOWN:
+                if self.points >= self.high_score :
+                    self.high_score = self.points
                 self.run()
 
 
