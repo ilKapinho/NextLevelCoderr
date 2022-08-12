@@ -100,7 +100,7 @@ class Game:
 
     def draw_death_count(self):
         font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(f"attempts: {self.death_count} " , True, (0, 0, 0))
+        text = font.render(f"Attempts: {self.death_count} " , True, (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.center = (100, 50)
         self.screen.blit(text, text_rect)
